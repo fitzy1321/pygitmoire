@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+
+from github import Github
+
+from github import Auth
+
+auth = Auth.Token("Access Token")
+
+with Github(auth=auth) as g:
+    for repo in g.get_user().get_repos():
+        print(dir(repo))
