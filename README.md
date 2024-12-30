@@ -13,3 +13,9 @@ I'm thinking of using these technologies:
   - automate pulling the latest from repos, syncing with local rpi server repos
 - Cron Job?
   - Run python script at midnight or something
+
+cron job example, run at midnight everyday
+
+```py
+0 0 * * * python3 home/pi/test.py
+```
