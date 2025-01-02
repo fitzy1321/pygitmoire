@@ -1,11 +1,21 @@
 #!/usr/bin/python3
+import os
+import pathlib
 
-from github import Github
+from github import Auth, Github
 
-from github import Auth
 
-auth = Auth.Token("Access Token")
+def check_or_create_path(path: pathlib.Path) -> None:
+    if not os.path.exists(path):
+        os.makedirs(path, exist_ok=True)
 
-with Github(auth=auth) as g:
-    for repo in g.get_user().get_repos():
-        print(dir(repo))
+
+if __name__ == "__main__":
+    top_git_path = pathlib.Path(os.environ.get("PYGITMOIRE_GIT_PATH", "~/github/"))
+    check_or_create_path(top_git_path)
+    os.chdir(top_git_path)
+
+    auth = Auth.Token("Access Token")
+    with Github(auth=auth) as g:
+        for repo in g.get_user().get_repos():
+            print(help(repo))
